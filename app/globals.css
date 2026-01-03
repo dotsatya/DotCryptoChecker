@@ -7,7 +7,7 @@
   .sub-heading {
     @apply font-medium text-base text-stone-500 dark:text-stone-400;
   }
-  
+
   .content-bg {
     @apply bg-black/5 dark:bg-white/5;
   }
@@ -22,5 +22,14 @@
            p-4
            border border-black/10 dark:border-white/10
            shadow-sm;
+  }
+
+  .active {
+    @apply bg-indigo-600 text-white shadow-md;
+  }
+
+  .in-active {
+    @apply bg-gray-100 text-gray-600 hover:bg-gray-200
+dark:bg-white/5 dark:text-gray-400 dark:hover:bg-white/10;
   }
 }

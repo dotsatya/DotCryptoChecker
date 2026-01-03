@@ -13,8 +13,10 @@ interface CandlestickChartProps {
   children?: React.ReactNode;
   mode?: 'historical' | 'live';
   initialPeriod?: Period;
-  liveInterval: '1s' | '1m';
-  setLiveInterval: (interval: '1s' | '1m') => void;
+  liveInterval?: '1s' | '1m'; /////////here is the problem ????????
+  setLiveInterval?: (interval: '1s' | '1m') => void; /////////here is the problem ????????
+  interval?: '1s' | '1m'; /////////here is the problem ???????? // added
+  setInterval?: (interval: '1s' | '1m') => void; /////////here is the problem ????????  // added
 }
 
 interface ConverterProps {
