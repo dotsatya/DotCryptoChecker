@@ -47,7 +47,7 @@ const Header: React.FC = () => {
           rounded-xl
           bg-white/50 dark:bg-black/50
           backdrop-blur-xl
-          border border-gray-100 dark:border-white/10
+          border border-black/10 dark:border-white/10
           shadow-lg shadow-black/10 dark:shadow-black/40
           transition-all duration-300
         "
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
           </label>
 
           {/* APP NAME - hidden lg:block */}
-          <h1 className=" text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <h1 className="hidden sm:block text-xl font-bold tracking-tight text-slate-900 dark:text-white">
             DotCryptoChecker
           </h1>
         </div>
@@ -87,7 +87,7 @@ const Header: React.FC = () => {
 
           <Button
             variant="outline"
-            className="rounded-xl text-red-500"
+            className="font-bold rounded-xl  text-red-500  hover:bg-red-500/10 hover:dark:bg-red-500/20 hover:transition-colors cursor-pointer"
             aria-label="Log out"
           >
             Log Out

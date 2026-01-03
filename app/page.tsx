@@ -1,44 +1,59 @@
-import Image from "next/image";
-import React from "react";
+import CoinOverview from "@/components/home/CoinOverview";
+import TrandingCoins from "@/components/home/TrandingCoins";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Suspense } from "react";
 
-const Page = () => {
-  // CG-1jKCPxZn53q6ND5zvKaXzQtW
-  // https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=bitcoin&x_cg_demo_api_key=CG-1jKCPxZn53q6ND5zvKaXzQtW
-
-  // {
-  //   "bitcoin": {
-  //     "usd": 90163
-  //   }
-  // }
-
+const page = () => {
   return (
-    <main className="p-6">
-      <section className="flex">
-        <div
-          id="coin-overview"
-          className="bg-black/5 dark:bg-white/5 p-3 flex flex-col rounded-2xl"
-        >
-          <div className=" flex flex-row gap-3 p-1">
-            <Image
-              src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
-              alt="Bitcoin"
-              width={50}
-              height={50}
-            />
-            <div>
-              <p className=" font-sans font-medium text-base text-stone-500 dark:text-stone-400">
-                Bitcoin / BTC
-              </p>
-              <h1 className="text-xl font-bold">$90163.00</h1>
+    <main className="flex flex-col lg:flex-row sm:px-6 gap-6">
+      {/* Coin Overview */}
+      <section className="w-full lg:w-1/2 sm:pt-6">
+        <Suspense
+          fallback={
+            <div className="content-card p-4 space-y-4">
+              <Skeleton className="h-4 w-32" />
+              <div className="flex items-center gap-3">
+                <Skeleton className="h-10 w-10 rounded-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-6 w-36" />
+                </div>
+              </div>
             </div>
-          </div>
-          <div>DotCrypto</div>
-        </div>
-        <div>DotCryptoCheckere</div>
+          }
+        >
+          <CoinOverview />
+        </Suspense>
       </section>
-      <section>CryptoChecker</section>
+
+      {/* Trending Coins */}
+      <section className="w-full lg:w-1/2 sm:pt-6">
+        <Suspense
+          fallback={
+            <div className="content-card p-4 space-y-4">
+              <Skeleton className="h-4 w-40" />
+
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-3 w-1/2">
+                    <Skeleton className="h-6 w-6 rounded-full" />
+                    <Skeleton className="h-4 w-24" />
+                  </div>
+                  <Skeleton className="h-4 w-14" />
+                  <Skeleton className="h-4 w-20" />
+                </div>
+              ))}
+            </div>
+          }
+        >
+          <TrandingCoins />
+        </Suspense>
+      </section>
     </main>
   );
 };
 
-export default Page;
+export default page;
