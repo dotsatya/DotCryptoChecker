@@ -2,6 +2,7 @@ import { fetcher } from "@/lib/api.actions";
 import DataTable from "../DataTable";
 import Image from "next/image";
 import { formatCurrency } from "@/lib/utils";
+import { TrendingDown, TrendingUp } from "lucide-react";
 
 const Categories = async () => {
   let categories: Category[] = [];
@@ -64,7 +65,12 @@ const Categories = async () => {
       cell: (category) => {
         const isUp = category.market_cap_change_24h >= 0;
         return (
-          <span className={isUp ? "text-green-500" : "text-red-500"}>
+          <span
+            className={`inline-flex items-center gap-1 font-medium ${
+              isUp ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {isUp ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
             {category.market_cap_change_24h.toFixed(2)}%
           </span>
         );

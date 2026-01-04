@@ -12,7 +12,7 @@ const page = () => {
         <div className="w-full lg:w-[60%] sm:pt-6">
           <Suspense
             fallback={
-              <div className="content-card p-4 space-y-4">
+              <div className="content-card p-6 space-y-6 min-h-90">
                 <Skeleton className="h-4 w-32" />
                 <div className="flex items-center gap-3">
                   <Skeleton className="h-10 w-10 rounded-full" />
@@ -32,7 +32,7 @@ const page = () => {
         <div className="w-full lg:w-[40%] sm:pt-6">
           <Suspense
             fallback={
-              <div className="content-card p-4 space-y-4">
+              <div className="content-card p-6 space-y-6 min-h-90">
                 <Skeleton className="h-4 w-40" />
 
                 {Array.from({ length: 6 }).map((_, i) => (
