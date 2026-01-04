@@ -8,6 +8,7 @@ import CoinsPagination from "@/components/CoinsPagination";
 const Coins = async ({ searchParams }: NextPageProps) => {
   const params = await searchParams;
   const currentPage = parseInt(params.page as string) || 1;
+  const search = (params.search as string) || "";
   const itemsPerPage = 10;
 
   let coinsData: CoinMarketData[] = [];
@@ -25,6 +26,15 @@ const Coins = async ({ searchParams }: NextPageProps) => {
     );
   } catch (error) {
     console.error("Coins fetch failed:", error);
+  }
+
+  // Filter by search
+  if (search) {
+    coinsData = coinsData.filter(coin =>
+      coin.name.toLowerCase().includes(search.toLowerCase()) ||
+      coin.symbol.toLowerCase().includes(search.toLowerCase()) ||
+      coin.market_cap_rank.toString().includes(search)
+    );
   }
 
   // Calculate pagination

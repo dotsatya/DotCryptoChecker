@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { Button } from "../ui/button";
+import SearchBar from "../SearchBar";
 
 /* ================= TYPES ================= */
 interface NavItem {
@@ -70,7 +71,7 @@ const Header: React.FC = () => {
           </label>
 
           {/* APP NAME - hidden lg:block */}
-          <h1 className="hidden sm:block text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <h1 className="hidden lg:block text-xl font-bold tracking-tight text-slate-900 dark:text-white">
             DotCryptoChecker
           </h1>
         </div>
@@ -82,16 +83,14 @@ const Header: React.FC = () => {
             <NavLinks className="text-base font-medium cursor-pointer hover:text-blue-500 hover:transition-colors" />
           </nav>
 
+          <div className="">
+            <SearchBar />
+          </div>
+
           <div className="hidden lg:block border-l-2 dark:border-gray-200"></div>
           <ThemeToggle />
 
-          <Button
-            variant="outline"
-            className="font-bold rounded-xl  text-red-500  hover:bg-red-500/10 hover:dark:bg-red-500/20 hover:transition-colors cursor-pointer"
-            aria-label="Log out"
-          >
-            Log Out
-          </Button>
+     
         </div>
       </header>
 
@@ -149,6 +148,7 @@ const Header: React.FC = () => {
         {/* MOBILE NAV */}
         <nav className="flex-1 px-6 py-6 space-y-4 text-lg font-semibold text-slate-800 dark:text-slate-200">
           <NavLinks className="block text-lg font-semibold hover:text-blue-500 transition-colors" />
+          
         </nav>
       </aside>
     </>
