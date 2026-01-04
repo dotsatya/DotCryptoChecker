@@ -80,7 +80,7 @@ const TrandingCoins = async () => {
       <p className="sub-heading mb-3">Trending Coins</p>
 
       <DataTable
-        data={trendingCoins.coins.slice(0, 6)}
+        data={trendingCoins.coins.slice(0, 7)} /////for fixing height
         columns={columns}
         rowKey={(coin) => coin.item.id}
       />

@@ -10,17 +10,19 @@ import { fetcher } from "@/lib/api.actions";
 import { convertOHLCData } from "@/lib/utils";
 import {
   CandlestickSeries,
+  ColorType,
   createChart,
   IChartApi,
   ISeriesApi,
 } from "lightweight-charts";
 import React, { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
 const CandleStickChart = ({
   children,
   data,
   coinId,
-  height = 360,
+  height = 390,
   initialPeriod,
 }: CandlestickChartProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +34,44 @@ const CandleStickChart = ({
   const [loading, setLoading] = useState(false);
   const [period, setPeriod] = useState<Period>(initialPeriod ?? "daily");
   const [OHLCData, setOHLCData] = useState<OHLCData[]>(data ?? []);
+
+  ////chart theme
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  const lightChartTheme = {
+    layout: {
+      background: { type: ColorType.Solid, color: "transparent" },
+      textColor: "#374151", // gray-700
+    },
+    grid: {
+      vertLines: { color: "#e5e7eb" }, // gray-200
+      horzLines: { color: "#e5e7eb" },
+    },
+    timeScale: {
+      borderColor: "#e5e7eb",
+    },
+    rightPriceScale: {
+      borderColor: "#e5e7eb",
+    },
+  };
+
+  const darkChartTheme = {
+    layout: {
+      background: { type: ColorType.Solid, color: "transparent" },
+      textColor: "#9ca3af", // gray-400
+    },
+    grid: {
+      vertLines: { color: "rgba(255,255,255,0.05)" },
+      horzLines: { color: "rgba(255,255,255,0.05)" },
+    },
+    timeScale: {
+      borderColor: "rgba(255,255,255,0.1)",
+    },
+    rightPriceScale: {
+      borderColor: "rgba(255,255,255,0.1)",
+    },
+  };
 
   const fatchOHLCData = async (selectedPeriod: Period) => {
     if (isFetchingRef.current) return;
@@ -63,44 +103,77 @@ const CandleStickChart = ({
     fatchOHLCData(newPeriod);
   };
 
+  // useEffect(() => {
+  //   const container = chartContainerRef.current;
+  //   if (!container) return;
+
+  //   const TIME_PERIODS: readonly Period[] = [
+  //     "daily",
+  //     "weekly",
+  //     "monthly",
+  //     "3months",
+  //     "6months",
+  //     "yearly",
+  //   ];
+
+  // const showTime = Object.keys(PERIOD_CONFIG).includes(period);
+
+  //   const chart = createChart(container, {
+  //     ...getChartConfig(height, showTime),
+  //     width: container.clientWidth,
+  //   });
+
+  //   const series = chart.addSeries(CandlestickSeries, getCandlestickConfig());
+  //   series.setData(convertOHLCData(OHLCData));
+  //   chart.timeScale().fitContent();
+
+  //   chartRef.current = chart;
+  //   candlestickSeriesRef.current = series;
+  //   const observer = new ResizeObserver((entries) => {
+  //     if (!entries.length) return;
+  //     chart.applyOptions({ width: entries[0].contentRect.width });
+  //   });
+  //   observer.observe(container);
+  //   return () => {
+  //     chart.remove();
+  //     observer.disconnect();
+  //     chartRef.current = null;
+  //     candlestickSeriesRef.current = null;
+  //   };
+  // }, [height]);
+
   useEffect(() => {
     const container = chartContainerRef.current;
     if (!container) return;
 
-    const TIME_PERIODS: readonly Period[] = [
-      "daily",
-      "weekly",
-      "monthly",
-      "3months",
-      "6months",
-      "yearly",
-    ];
-
-    const showTime = TIME_PERIODS.includes(period);
+    const showTime = Object.keys(PERIOD_CONFIG).includes(period);
 
     const chart = createChart(container, {
       ...getChartConfig(height, showTime),
+      ...(isDark ? darkChartTheme : lightChartTheme),
       width: container.clientWidth,
     });
 
     const series = chart.addSeries(CandlestickSeries, getCandlestickConfig());
+
     series.setData(convertOHLCData(OHLCData));
     chart.timeScale().fitContent();
 
     chartRef.current = chart;
     candlestickSeriesRef.current = series;
+
     const observer = new ResizeObserver((entries) => {
       if (!entries.length) return;
       chart.applyOptions({ width: entries[0].contentRect.width });
     });
+
     observer.observe(container);
+
     return () => {
       chart.remove();
       observer.disconnect();
-      chartRef.current = null;
-      candlestickSeriesRef.current = null;
     };
-  }, [height]);
+  }, [height, period, isDark]); // 👈 IMPORTANT: isDark dependency
 
   useEffect(() => {
     if (!candlestickSeriesRef.current) return;
@@ -131,8 +204,8 @@ const CandleStickChart = ({
         <div className="flex items-center gap-3">{children}</div>
 
         {/* PERIOD CONTROLS */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="pl-1 text-base font-medium text-gray-500 dark:text-gray-400">
+        <div className="flex items-center gap-4 flex-wrap">
+          <span className="pl-1  text-lg font-medium text-gray-500 dark:text-gray-400">
             Period:
           </span>
 
@@ -160,8 +233,8 @@ const CandleStickChart = ({
         style={{ height }}
         className="
           w-full rounded-xl
-          bg-gray-50 dark:bg-black
-          border border-gray-200 dark:border-gray-800
+          bg-white/60 dark:bg-black/60
+          border border-gray-300 dark:border-gray-800
           flex items-center justify-center
           text-sm text-gray-400
         "

@@ -6,14 +6,15 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "assets.coingecko.com",
+        pathname: "/**",
       },
       {
         protocol: "https",
         hostname: "coin-images.coingecko.com",
+        pathname: "/**",
       },
-    ]
-  }
-  /* config options here */
+    ],
+  },
 };
 
 export default nextConfig;

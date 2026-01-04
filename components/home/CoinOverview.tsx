@@ -2,7 +2,8 @@ import { fetcher } from "@/lib/api.actions";
 import { formatCurrency } from "@/lib/utils";
 import Image from "next/image";
 import CandleStickChart from "../CandleStickChart";
-import CoinOverviewFallback from "./CoinOverviewFallback";
+import CoinOverviewFallback from "../CoinOverviewFallback";
+
 
 const CoinOverview = async () => {
   let coin: CoinDetailsData | null = null;
@@ -22,6 +23,8 @@ const CoinOverview = async () => {
     console.error("Error fetching coin page data:", error);
     return <CoinOverviewFallback />;
   }
+
+
 
   return (
     <>

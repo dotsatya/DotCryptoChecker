@@ -132,29 +132,31 @@ export async function fetcher<T>(
 
   const retryCount = 3;
   const retryDelay = 2000;
-
   for (let i = 0; i < retryCount; i++) {
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+
       const response = await fetch(url, {
         headers: {
           "x-cg-pro-api-key": API_KEY as string,
           "Content-Type": "application/json",
         },
         next: { revalidate },
+        signal: controller.signal,
       });
 
-      // ✅ SUCCESS → read body ONCE and return
+      clearTimeout(timeout);
+
       if (response.ok) {
         return (await response.json()) as T;
       }
 
-      // ❌ ERROR RESPONSE
       if (response.status === 429 && i < retryCount - 1) {
         await new Promise((r) => setTimeout(r, retryDelay));
         continue;
       }
 
-      // ❌ Non-retriable error
       const errorBody: CoinGeckoErrorBody = await response
         .json()
         .catch(() => ({}));
@@ -166,9 +168,12 @@ export async function fetcher<T>(
     } catch (error) {
       console.error("Error fetching data:", error);
 
-      if (i === retryCount - 1) {
-        throw error;
+      if (i < retryCount - 1) {
+        await new Promise((r) => setTimeout(r, retryDelay));
+        continue;
       }
+
+      throw error;
     }
   }
 
