@@ -7,23 +7,23 @@ import { TrendingDown, TrendingUp } from "lucide-react";
 const columns = [
   {
     header: "Coin",
-    headClassName: "text-left",
+    headClassName: "table-text-left",
     cell: (coin: TrendingCoin) => (
-      <div className="flex items-center gap-3 min-w-0">
-        <div className="relative w-6 h-6 shrink-0">
+      <div className="flex-row-center gap-sm min-w-0">
+        <div className="icon-wrap">
           <Image
             src={coin.item.thumb}
             alt={coin.item.name}
             fill
-            className="object-contain rounded-full"
+            className="img-contain"
           />
         </div>
 
-        <div className="flex flex-col min-w-0">
-          <span className="font-medium truncate">
+        <div className="flex-col min-w-0">
+          <span className="font-medium text-truncate">
             {coin.item.name}
           </span>
-          <span className="text-xs uppercase text-stone-500 dark:text-stone-400">
+          <span className="text-xs-muted">
             {coin.item.symbol}
           </span>
         </div>
@@ -42,8 +42,8 @@ const columns = [
 
       return (
         <div
-          className={`flex items-center justify-end gap-1 font-medium ${
-            isUp ? "text-green-500" : "text-red-500"
+          className={`trend-right ${
+            isUp ? "trend-up" : "trend-down"
           }`}
         >
           {isUp ? (
@@ -59,9 +59,9 @@ const columns = [
   {
     header: "Price",
     headClassName: "text-right",
-    cellClassName: "text-right font-semibold",
+    cellClassName: "text-right table-cell-strong",
     cell: (coin: TrendingCoin) => (
-      <span className="font-semibold ">
+      <span className="table-cell-strong">
         {formatCurrency(coin.item.data.price)}
       </span>
     ),
@@ -76,17 +76,16 @@ const TrandingCoins = async () => {
   );
 
   return (
-    <section className="content-card p-4">
+    <section className="content-card">
       <p className="sub-heading mb-3">Trending Coins</p>
 
       <DataTable
-        data={trendingCoins.coins.slice(0, 7)} /////for fixing height
+        data={trendingCoins.coins.slice(0, 7)}
         columns={columns}
         rowKey={(coin) => coin.item.id}
       />
     </section>
   );
 };
-
 
 export default TrandingCoins;

@@ -5,6 +5,12 @@ interface NextPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
+// interface NextPageProps {
+//   params: { [key: string]: string };
+//   searchParams: { [key: string]: string | string[] | undefined };
+// }
+
+
 interface CandlestickChartProps {
   data?: OHLCData[];
   liveOhlcv?: OHLCData | null;

@@ -11,7 +11,7 @@ const Categories = async () => {
     categories = await fetcher<Category[]>(
       "/coins/categories",
       undefined,
-      600 // 10 min cache (production-safe)
+      600
     );
   } catch (error) {
     console.error("Failed to fetch categories:", error);
@@ -19,13 +19,12 @@ const Categories = async () => {
 
   if (!categories.length) {
     return (
-      <section className="content-card p-4 text-sm text-stone-500">
+      <section className="content-card error-text">
         Failed to load categories.
       </section>
     );
   }
 
-  // ✅ Sort by Market Cap (descending)
   const sortedCategories = [...categories].sort(
     (a, b) => b.market_cap - a.market_cap
   );
@@ -33,18 +32,18 @@ const Categories = async () => {
   const columns: DataTableColumn<Category>[] = [
     {
       header: "Category",
-      headClassName: "text-left break-words whitespace-normal",
-      cellClassName: "font-semibold break-words whitespace-normal",
+      headClassName: "table-text-left",
+      cellClassName: "table-text-left table-cell-strong",
       cell: (category) => (
-        <span className="leading-tight">{category.name}</span>
+        <span className="category-name">{category.name}</span>
       ),
     },
     {
       header: "Top Gainers",
-      headClassName: "text-right hidden lg:table-cell",
-      cellClassName: "text-right hidden lg:table-cell",
+      headClassName: "text-right table-hidden-lg",
+      cellClassName: "text-right table-hidden-lg",
       cell: (category) => (
-        <div className="flex justify-end items-center gap-2">
+        <div className="category-coins">
           {category.top_3_coins.map((coin, idx) => (
             <Image
               key={idx}
@@ -52,7 +51,7 @@ const Categories = async () => {
               width={22}
               height={22}
               alt="coin"
-              className="rounded-full"
+              className="category-coin-img"
             />
           ))}
         </div>
@@ -61,15 +60,12 @@ const Categories = async () => {
     {
       header: "24h Change",
       headClassName: "text-right",
-      cellClassName: "text-right font-medium",
+      cellClassName: "text-right table-cell-medium",
       cell: (category) => {
         const isUp = category.market_cap_change_24h >= 0;
+
         return (
-          <span
-            className={`inline-flex items-center gap-1 font-medium ${
-              isUp ? "text-green-500" : "text-red-500"
-            }`}
-          >
+          <span className={`trend ${isUp ? "trend-up" : "trend-down"}`}>
             {isUp ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
             {category.market_cap_change_24h.toFixed(2)}%
           </span>
@@ -78,20 +74,22 @@ const Categories = async () => {
     },
     {
       header: "Market Cap",
-      headClassName: "text-right hidden md:table-cell",
-      cellClassName: "text-right hidden md:table-cell font-medium tabular-nums",
+      headClassName: "text-right table-hidden-md",
+      cellClassName:
+        "text-right table-hidden-md table-cell-medium table-numbers",
       cell: (category) => formatCurrency(category.market_cap),
     },
     {
       header: "24h Volume",
-      headClassName: "text-right hidden md:table-cell",
-      cellClassName: "text-right hidden md:table-cell font-medium tabular-nums",
+      headClassName: "text-right table-hidden-md",
+      cellClassName:
+        "text-right table-hidden-md table-cell-medium table-numbers",
       cell: (category) => formatCurrency(category.volume_24h),
     },
   ];
 
   return (
-    <section className="content-card p-4">
+    <section className="content-card">
       <p className="sub-heading mb-3">Top Categories</p>
 
       <DataTable

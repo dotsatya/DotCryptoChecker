@@ -33,3 +33,220 @@
 dark:bg-white/5 dark:text-gray-400 dark:hover:bg-white/10;
   }
 }
+
+
+@layer components {
+  /* ---------- Table helpers ---------- */
+  .table-text-left {
+    @apply text-left break-words whitespace-normal;
+  }
+
+  .table-text-right {
+    @apply text-right;
+  }
+
+  .table-hidden-lg {
+    @apply hidden lg:table-cell;
+  }
+
+  .table-hidden-md {
+    @apply hidden md:table-cell;
+  }
+
+  .table-cell-strong {
+    @apply font-semibold;
+  }
+
+  .table-cell-medium {
+    @apply font-medium;
+  }
+
+  .table-numbers {
+    @apply tabular-nums;
+  }
+
+  /* ---------- Category specific ---------- */
+  .category-name {
+    @apply leading-tight;
+  }
+
+  .category-coins {
+    @apply flex justify-end items-center gap-2;
+  }
+
+  .category-coin-img {
+    @apply rounded-full;
+  }
+
+  /* ---------- Trend indicators ---------- */
+  .trend {
+    @apply inline-flex items-center gap-1 font-medium;
+  }
+
+  .trend-up {
+    @apply text-green-500;
+  }
+
+  .trend-down {
+    @apply text-red-500;
+  }
+
+  /* ---------- Error state ---------- */
+  .error-text {
+    @apply text-sm text-stone-500;
+  }
+}
+
+@layer components {
+  /* ---------- Flex utilities ---------- */
+  .flex-row {
+    @apply flex;
+  }
+
+  .flex-gap-sm {
+    @apply gap-3;
+  }
+
+  .flex-center {
+    @apply flex items-center;
+  }
+
+  /* ---------- Text utilities ---------- */
+  .text-muted {
+    @apply font-medium text-base text-stone-500 dark:text-stone-400;
+  }
+
+  .text-title {
+    @apply text-xl font-semibold;
+  }
+
+  /* ---------- Media ---------- */
+  .img-rounded {
+    @apply rounded-full;
+  }
+
+  /* ---------- Layout helpers ---------- */
+  .card-rounded {
+    @apply rounded-2xl;
+  }
+}
+
+@layer components {
+  /* ---------- Flex & layout ---------- */
+  .flex-row-center {
+    @apply flex items-center;
+  }
+
+  .flex-col {
+    @apply flex flex-col;
+  }
+
+  .gap-sm {
+    @apply gap-3;
+  }
+
+  .gap-xs {
+    @apply gap-1;
+  }
+
+  .min-w-0 {
+    @apply min-w-0;
+  }
+
+  .shrink-0 {
+    @apply shrink-0;
+  }
+
+  /* ---------- Image wrappers ---------- */
+  .icon-wrap {
+    @apply relative w-6 h-6 shrink-0;
+  }
+
+  .img-contain {
+    @apply object-contain rounded-full;
+  }
+
+  /* ---------- Text utilities ---------- */
+  .text-truncate {
+    @apply truncate;
+  }
+
+  .text-xs-muted {
+    @apply text-xs uppercase text-stone-500 dark:text-stone-400;
+  }
+
+  /* ---------- Trend (already used earlier) ---------- */
+  .trend-right {
+    @apply flex items-center justify-end gap-1 font-medium;
+  }
+}
+
+
+@layer components {
+  /* ---------- Page & layout ---------- */
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 py-6;
+  }
+
+  .page-title {
+    @apply text-lg font-semibold mb-4;
+  }
+
+  /* ---------- Table cell alignment ---------- */
+  .cell-left {
+    @apply text-left;
+  }
+
+  .cell-right {
+    @apply text-right font-medium;
+  }
+
+  .cell-muted {
+    @apply text-stone-500 dark:text-stone-400;
+  }
+
+  /* ---------- Rank ---------- */
+  .rank-cell {
+    @apply font-medium text-stone-500;
+  }
+
+  /* ---------- Token cell ---------- */
+  .token-cell {
+    @apply min-w-0;
+  }
+
+  .token-info {
+    @apply flex items-center gap-3 min-w-0;
+  }
+
+  .token-name {
+    @apply font-medium truncate;
+  }
+
+  .token-symbol {
+    @apply text-xs uppercase text-stone-500 dark:text-stone-400;
+  }
+
+  /* ---------- Price & numbers ---------- */
+  .price-cell {
+    @apply text-right font-semibold tabular-nums;
+  }
+
+  .market-cap-cell {
+    @apply text-right font-medium tabular-nums;
+  }
+
+  /* ---------- Change ---------- */
+  .change-cell {
+    @apply text-right;
+  }
+
+  .change-value {
+    @apply font-medium;
+  }
+
+  /* ---------- Table ---------- */
+  .table-default {
+    @apply w-full;
+  }
+}

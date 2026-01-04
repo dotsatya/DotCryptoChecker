@@ -16,9 +16,9 @@ interface NavLinksProps {
 /* ================= CONSTANTS ================= */
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "Contact", href: "/contact" },
-  { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
+  { label: "All Coins", href: "/coins" },
+  // { label: "About", href: "/about" },
+  // { label: "Projects", href: "/projects" },
 ];
 
 /* ================= REUSABLE NAV ================= */

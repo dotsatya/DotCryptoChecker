@@ -4,7 +4,6 @@ import Image from "next/image";
 import CandleStickChart from "../CandleStickChart";
 import CoinOverviewFallback from "../CoinOverviewFallback";
 
-
 const CoinOverview = async () => {
   let coin: CoinDetailsData | null = null;
   let coinOHLCData: OHLCData[] = [];
@@ -24,35 +23,32 @@ const CoinOverview = async () => {
     return <CoinOverviewFallback />;
   }
 
-
-
   return (
-    <>
-      <div id="coin-overview" className="content-card rounded-2xl">
-        <CandleStickChart
-          data={coinOHLCData}
-          coinId="bitcoin"
-          initialPeriod="weekly"
-        >
-          <div className=" flex  gap-3  ">
-            <Image
-              src={coin.image.large}
-              alt={coin.name}
-              width={50}
-              height={50}
-            />
-            <div>
-              <p className="font-medium text-base text-stone-500 dark:text-stone-400">
-                {coin.name} / BTC
-              </p>
-              <h1 className="text-xl font-semibold">
-                {formatCurrency(coin.market_data.current_price.usd)}
-              </h1>
-            </div>
+    <div id="coin-overview" className="content-card card-rounded">
+      <CandleStickChart
+        data={coinOHLCData}
+        coinId="bitcoin"
+        initialPeriod="weekly"
+      >
+        <div className="flex-row flex-gap-sm">
+          <Image
+            src={coin.image.large}
+            alt={coin.name}
+            width={50}
+            height={50}
+            className="img-rounded"
+          />
+          <div>
+            <p className="text-muted">
+              {coin.name} / BTC
+            </p>
+            <h1 className="text-title">
+              {formatCurrency(coin.market_data.current_price.usd)}
+            </h1>
           </div>
-        </CandleStickChart>
-      </div>
-    </>
+        </div>
+      </CandleStickChart>
+    </div>
   );
 };
 

@@ -103,45 +103,6 @@ const CandleStickChart = ({
     fatchOHLCData(newPeriod);
   };
 
-  // useEffect(() => {
-  //   const container = chartContainerRef.current;
-  //   if (!container) return;
-
-  //   const TIME_PERIODS: readonly Period[] = [
-  //     "daily",
-  //     "weekly",
-  //     "monthly",
-  //     "3months",
-  //     "6months",
-  //     "yearly",
-  //   ];
-
-  // const showTime = Object.keys(PERIOD_CONFIG).includes(period);
-
-  //   const chart = createChart(container, {
-  //     ...getChartConfig(height, showTime),
-  //     width: container.clientWidth,
-  //   });
-
-  //   const series = chart.addSeries(CandlestickSeries, getCandlestickConfig());
-  //   series.setData(convertOHLCData(OHLCData));
-  //   chart.timeScale().fitContent();
-
-  //   chartRef.current = chart;
-  //   candlestickSeriesRef.current = series;
-  //   const observer = new ResizeObserver((entries) => {
-  //     if (!entries.length) return;
-  //     chart.applyOptions({ width: entries[0].contentRect.width });
-  //   });
-  //   observer.observe(container);
-  //   return () => {
-  //     chart.remove();
-  //     observer.disconnect();
-  //     chartRef.current = null;
-  //     candlestickSeriesRef.current = null;
-  //   };
-  // }, [height]);
-
   useEffect(() => {
     const container = chartContainerRef.current;
     if (!container) return;
