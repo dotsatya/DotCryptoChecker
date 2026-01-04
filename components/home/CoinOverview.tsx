@@ -2,40 +2,35 @@ import { fetcher } from "@/lib/api.actions";
 import { formatCurrency } from "@/lib/utils";
 import Image from "next/image";
 import CandleStickChart from "../CandleStickChart";
-import CandleStickChartClient from "../CandleStickChartClient";
+import CoinOverviewFallback from "./CoinOverviewFallback";
 
 const CoinOverview = async () => {
-  // let coin;
+  let coin: CoinDetailsData | null = null;
+  let coinOHLCData: OHLCData[] = [];
 
-  // try {
-  //   coin = await fetcher<CoinDetailsData>("/coins/bitcoin", {
-  //     dex_pair_format: "symbol",
-  //   });
-  // } catch (error) {
-  //   console.error('Error fetching coin overview:', error);
-  //   return <CoinOverviewFallback />;
-  // }
-
-  // const coin = await fetcher<CoinDetailsData>("/coins/bitcoin", {
-  //   dex_pair_format: "symbol",
-  // });
-
-  const [coin, coinOHLCData] = await Promise.all([
-    await fetcher<CoinDetailsData>("/coins/bitcoin", {
-      dex_pair_format: "symbol",
-    }),
-    await fetcher<OHLCData[]>("/coins/bitcoin/ohlc", {
-      vs_currency: "usd",
-      days: 7,
-      // interval: "hourly",
-      // precision: "full",
-    }),
-  ]);
+  try {
+    [coin, coinOHLCData] = await Promise.all([
+      fetcher<CoinDetailsData>("/coins/bitcoin", {
+        dex_pair_format: "symbol",
+      }),
+      fetcher<OHLCData[]>("/coins/bitcoin/ohlc", {
+        vs_currency: "usd",
+        days: 7,
+      }),
+    ]);
+  } catch (error) {
+    console.error("Error fetching coin page data:", error);
+    return <CoinOverviewFallback />;
+  }
 
   return (
     <>
       <div id="coin-overview" className="content-card rounded-2xl">
-        <CandleStickChart data={coinOHLCData} coinId="bitcoin">
+        <CandleStickChart
+          data={coinOHLCData}
+          coinId="bitcoin"
+          initialPeriod="weekly"
+        >
           <div className=" flex  gap-3  ">
             <Image
               src={coin.image.large}

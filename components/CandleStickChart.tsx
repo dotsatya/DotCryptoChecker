@@ -21,51 +21,62 @@ const CandleStickChart = ({
   data,
   coinId,
   height = 360,
-  mode = "historical",
-  initialPeriod = "daily",
+  initialPeriod,
 }: CandlestickChartProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candlestickSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
 
+  const isFetchingRef = useRef(false); // ✅ ADD THIS
+
   const [loading, setLoading] = useState(false);
-  const [period, setPeriod] = useState(initialPeriod);
+  const [period, setPeriod] = useState<Period>(initialPeriod ?? "daily");
   const [OHLCData, setOHLCData] = useState<OHLCData[]>(data ?? []);
-  const [isPending, startTransition] = React.useTransition();
 
   const fatchOHLCData = async (selectedPeriod: Period) => {
+    if (isFetchingRef.current) return;
+
+    isFetchingRef.current = true;
     setLoading(true);
+
     try {
-      const { days, interval } = PERIOD_CONFIG[selectedPeriod];
-          await new Promise((resolve) => setTimeout(resolve, 1000)); // Add a 1-second delay
+      const { days } = PERIOD_CONFIG[selectedPeriod];
+
       const newData = await fetcher<OHLCData[]>(`/coins/${coinId}/ohlc`, {
         vs_currency: "usd",
         days,
-        // interval,
-        // precision: "full", ///////////////////
       });
+
       setOHLCData(newData ?? []);
     } catch (error) {
       console.error("Error fetching OHLC data:", error);
     } finally {
-      ///////////////////
-      setLoading(false); ///////////////////
-    } ///////////////////
+      setLoading(false);
+      isFetchingRef.current = false;
+    }
   };
 
   const handlePeriodChange = (newPeriod: Period) => {
-    if (newPeriod === period) return;
-    startTransition(async () => {
-      setPeriod(newPeriod);
-      await fatchOHLCData(newPeriod);
-    });
+    if (newPeriod === period || loading) return;
+
+    setPeriod(newPeriod);
+    fatchOHLCData(newPeriod);
   };
 
   useEffect(() => {
     const container = chartContainerRef.current;
     if (!container) return;
 
-    const showTime = ["daily", "weekly", "monthly", "3months", "6months", "yearly", "max"].includes(period);
+    const TIME_PERIODS: readonly Period[] = [
+      "daily",
+      "weekly",
+      "monthly",
+      "3months",
+      "6months",
+      "yearly",
+    ];
+
+    const showTime = TIME_PERIODS.includes(period);
 
     const chart = createChart(container, {
       ...getChartConfig(height, showTime),
