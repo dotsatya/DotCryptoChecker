@@ -82,6 +82,10 @@ crypto-dashboard/
     └── type.d.ts                # Global type declarations
 ```
 
+## 🌐 Live Demo
+
+**View the live application:** [https://dotcryptochecker.vercel.app/](dotcryptochecker.vercel.app/)
+
 ## 🚀 Getting Started
 
 ### Prerequisites
