@@ -162,6 +162,7 @@ interface ExtendedPriceData {
 
 interface WebSocketMessage {
   type?: string;
+  symbol?: string;
   c?: string;
   ch?: string;
   i?: string;
@@ -179,6 +180,12 @@ interface WebSocketMessage {
   ty?: string;
   channel?: string;
   identifier?: string;
+  price?: number;
+  market_cap?: number;
+  volume_24h?: number;
+  price_change_24h?: number;
+  price_change_percentage_24h?: number;
+  timestamp?: number;
 }
 
 interface CoinDetailsData {

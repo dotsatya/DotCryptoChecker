@@ -160,13 +160,33 @@ export async function fetcher<T>(
       const errorBody: CoinGeckoErrorBody = await response
         .json()
         .catch(() => ({}));
+
+      // For client-side errors, provide more user-friendly messages
+      if (response.status >= 400 && response.status < 500) {
+        if (response.status === 400) {
+          throw new Error(`Invalid request: ${errorBody.error || 'Bad Request'}`);
+        }
+        if (response.status === 404) {
+          throw new Error(`Data not found: ${errorBody.error || 'Not Found'}`);
+        }
+        throw new Error(`Request error: ${errorBody.error || response.statusText}`);
+      }
+
       throw new Error(
         `API Error: ${response.status} : ${
           errorBody.error || response.statusText
         }`
       );
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // Only log unexpected errors
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      if (!errorMessage.includes('Too Many Requests') &&
+          !errorMessage.includes('Rate limited') &&
+          !errorMessage.includes('Invalid request') &&
+          !errorMessage.includes('Data not found') &&
+          !errorMessage.includes('Request error')) {
+        console.error("Error fetching data:", error);
+      }
 
       if (i < retryCount - 1) {
         await new Promise((r) => setTimeout(r, retryDelay));
