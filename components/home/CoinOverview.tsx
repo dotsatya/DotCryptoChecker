@@ -9,17 +9,35 @@ const CoinOverview = async () => {
   let coinOHLCData: OHLCData[] = [];
 
   try {
-    [coin, coinOHLCData] = await Promise.all([
+    // Add timeout wrapper for Vercel deployment
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Request timeout')), 8000)
+    );
+
+    const fetchPromise = Promise.all([
       fetcher<CoinDetailsData>("/coins/bitcoin", {
-        dex_pair_format: "symbol",
+        localization: false,
+        tickers: false,
+        market_data: true,
+        community_data: false,
+        developer_data: false,
+        sparkline: false,
       }),
       fetcher<OHLCData[]>("/coins/bitcoin/ohlc", {
         vs_currency: "usd",
         days: 7,
-      }),
+      }).catch(() => []), // OHLC might fail, provide empty array as fallback
     ]);
+
+    [coin, coinOHLCData] = await Promise.race([fetchPromise, timeoutPromise]) as [CoinDetailsData, OHLCData[]];
   } catch (error) {
-    console.error("Error fetching coin page data:", error);
+    console.warn("CoinOverview: API fetch failed, using fallback:", error);
+    return <CoinOverviewFallback />;
+  }
+
+  // Additional safety check
+  if (!coin || !coin.market_data) {
+    console.warn("CoinOverview: Invalid coin data received");
     return <CoinOverviewFallback />;
   }
 
